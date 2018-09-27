@@ -1,0 +1,50 @@
+{
+    "name": "webpack4",
+    "version": "1.0.0",
+    "description": "webpack4.0 note",
+    "main": "webpack.config.js",
+    "dependencies": {
+        "react": "^16.5.2",
+        "react-dom": "^16.5.2",
+        "react-router-dom": "^4.3.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.1.0",
+        "@babel/plugin-transform-runtime": "^7.1.0",
+        "@babel/preset-env": "^7.1.0",
+        "babel-loader": "^8.0.2",
+        "babel-plugin-transform-runtime": "^6.23.0",
+        "babel-preset-react": "^6.24.1",
+        "clean-webpack-plugin": "^0.1.19",
+        "css-loader": "^1.0.0",
+        "extract-text-webpack-plugin": "^3.0.2",
+        "file-loader": "^2.0.0",
+        "html-webpack-plugin": "^3.2.0",
+        "less-loader": "^4.1.0",
+        "postcss-loader": "^3.0.0",
+        "purifycss-webpack": "^0.7.0",
+        "style-loader": "^0.23.0",
+        "uglifyjs-webpack-plugin": "^2.0.1",
+        "webpack": "^4.20.2",
+        "webpack-cli": "^3.1.1",
+        "webpack-dev-server": "^3.1.9"
+    },
+    "scripts": {
+        "start": "webpack-dev-server",
+        "build": "webpack --config webpack.config.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/LPink777/Webpack4.git"
+    },
+    "keywords": [
+        "webpack"
+    ],
+    "author": "FF",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/LPink777/Webpack4/issues"
+    },
+    "homepage": "https://github.com/LPink777/Webpack4#readme"
+}
