@@ -7,14 +7,5 @@
             }
         ]
     ],
-    "presets": [
-        [
-            "es2015",
-            {
-                "modules": false
-            }
-        ],
-        "stage-3",
-        "react"
-    ]
+    "presets": ["stage-3", "es2015", "react"],
 }
