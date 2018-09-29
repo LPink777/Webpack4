@@ -7,8 +7,9 @@ class App extends Component {
     render() {
         return (
             <div>
-                <div>test11</div>
-                <divs>test22</divs>
+                <p>test11</p>
+                <p>test22</p>
+                <div>123</div>
                 <Comp/>
             </div>
         );

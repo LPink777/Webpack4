@@ -1,66 +1,18 @@
 const webpack = require('webpack');
 const path = require('path');
-const glob = require('glob');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const PurifycssWebpack = require('purifycss-webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-
-const website = {
-    publicPath: 'http://localhost:3000/'
-}
 
 module.exports = {
     entry: {
         app: './src/index.js',
-        vendor: ['react', 'react-dom', 'react-router-dom'],
     },
 
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].[hash:4].js',
-        chunkFilename: '[name].chunkhash.bundle.js',
-    },
-
-    optimization: {
-        splitChunks: {
-            chunks: "all",
-            minSize: 30000,
-            minChunks: 1,
-            maxAsyncRequests: 5,
-            maxInitialRequests: 3,
-            name: true,
-            cacheGroups: {
-                vendor: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: 'vendor',
-                    chunks: 'all',
-                    priority: 10,
-                    enforce: true
-                },
-                styles: {
-                    name: 'styles',
-                    test: /\.css$/,
-                    chunks: 'all',
-                    enforce: true,
-                    priority: 10
-                },
-            },
-        },
-        minimizer: [
-            new OptimizeCSSAssetsPlugin({
-                assetNameRegExp: /\.css\.*(?!.*map)/g,
-                cssProcessor: require('cssnano'),
-                cssProcessorOptions: {
-                    discardComments: { removeAll: true },
-                    safe: true,
-                    autoprefixer: false
-                },
-                canPrint: true
-            }),
-        ]
+        filename: '[name].[hash:4].js'
     },
 
     module: {
@@ -104,7 +56,7 @@ module.exports = {
 
         new MiniCssExtractPlugin({
             filename: '[name].css',
-            chunkFilename: '[name].[hash:4].css',
+            chunkFilename: '[id].css',
         }),
 
         new HtmlWebpackPlugin({
@@ -118,14 +70,6 @@ module.exports = {
             },
         }),
 
-        new PurifycssWebpack({
-            paths: glob.sync(path.resolve(__dirname, 'src/*.html')),
-        }),
-
-        new CopyWebpackPlugin([{
-            from: __dirname + '/src/static',
-            to: './static'
-        }]),
     ],
 
     devServer: {
@@ -145,8 +89,8 @@ module.exports = {
         extensions: ['.js', 'jsx', '.css'],
     },
 
-    mode: 'producttion',
+    mode: 'development',
 
-    devtool: 'cheap-module-source-map',
+    devtool: 'cheap-module-eval-source-map',
 
 };

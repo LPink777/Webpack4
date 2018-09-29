@@ -1,11 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
-
-const propTypes = {
-    
-};
-
 
 class Comp extends Component {
     render() {
@@ -16,9 +9,5 @@ class Comp extends Component {
         );
     }
 }
-
-
-Comp.propTypes = propTypes;
-
 
 export default Comp;
