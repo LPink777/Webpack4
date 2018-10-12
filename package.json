@@ -32,13 +32,14 @@
         "purifycss-webpack": "^0.7.0",
         "url-loader": "^1.1.1",
         "webpack": "^4.20.2",
+        "webpack-bundle-analyzer": "^3.0.2",
         "webpack-cli": "^3.1.1",
         "webpack-dev-server": "^3.1.9",
         "webpack-parallel-uglify-plugin": "^1.1.0"
     },
     "scripts": {
-        "dev": "webpack-dev-server --mode=development --colors --progress --config webpack.config.dev.js",
-        "pro": "webpack --mode=production --config webpack.config.pro.js --progress --profile",
+        "dev": "webpack-dev-server --mode development --colors --progress --config webpack.config.dev.js",
+        "pro": "webpack --mode production --config webpack.config.pro.js --progress --json > stats.json",
         "dll": "webpack --config webpack_dll.config.js"
     },
     "repository": {

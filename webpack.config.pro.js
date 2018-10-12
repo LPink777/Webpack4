@@ -9,6 +9,8 @@ const DllReferencePlugin = require('webpack/lib/DllReferencePlugin');
 const HappyPack = require('happypack');
 const happyThreadPool = HappyPack.ThreadPool({ size: 5 });
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+const ModuleConcatenationPlugin = require('webpack/lib/optimize/ModuleConcatenationPlugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const website = {
     publicPath: 'http://localhost:3000/'
@@ -127,6 +129,8 @@ module.exports = {
             },
         }),
 
+        new ModuleConcatenationPlugin(),
+
         new HappyPack({
             // 用唯一的标识符 id 来代表当前的 HappyPack 是用来处理一类特定的文件
             id: 'babel',
@@ -195,6 +199,8 @@ module.exports = {
             from: path.resolve(__dirname, 'dll/polyfill.dll.js'),
             to: path.resolve(__dirname, 'dist')
         }]),
+
+        new BundleAnalyzerPlugin()
     ],
 
     devServer: {
@@ -212,6 +218,7 @@ module.exports = {
             '@': path.join(__dirname, 'src'),
         },
         extensions: ['.js', 'jsx', '.css'],
+        mainFields: ['jsnext:main', 'browser', 'main']
     },
 
     mode: 'producttion',
