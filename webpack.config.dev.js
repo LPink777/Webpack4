@@ -52,8 +52,6 @@ module.exports = {
     },
 
     plugins: [
-        new CleanWebpackPlugin(['./dist']),
-
         new webpack.HotModuleReplacementPlugin(),
 
         new MiniCssExtractPlugin({
