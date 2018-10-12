@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './ss.css';
+import './common.css';
 class A extends Component {
     render() {
         return (
-            <div className='ss'>
+            <div className="ss">
                 xixixi 
             </div>
         );

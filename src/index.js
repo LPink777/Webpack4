@@ -4,7 +4,7 @@ import Comp from "./component";
 import A from "./a.js";
 import 'whatwg-fetch';
 import './index.css';
-import './ss.css';
+import './common.css';
 
 class App extends Component {
     render() {
@@ -12,7 +12,7 @@ class App extends Component {
             <div>
                 <p>test11</p>
                 <p>test22</p>
-                <div>123</div>
+                <div className="ss">123</div>
                 <A />
                 <Comp/>
             </div>

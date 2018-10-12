@@ -1,11 +1,9 @@
 const webpack = require('webpack');
 const path = require('path');
-const glob = require('glob');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const PurifycssWebpack = require('purifycss-webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const DllReferencePlugin = require('webpack/lib/DllReferencePlugin');
 const HappyPack = require('happypack');
@@ -44,12 +42,11 @@ module.exports = {
                     priority: 10,
                     enforce: true
                 },
-                styles: {
-                    name: 'styles',
-                    test: /\.css$/,
-                    chunks: 'all',
-                    enforce: true,
-                    priority: 10
+                common: {
+                    name: "common",
+                    chunks: "all",
+                    minSize: 1,
+                    priority: 0
                 },
             },
         },
@@ -175,7 +172,7 @@ module.exports = {
 
         new MiniCssExtractPlugin({
             filename: '[name].css',
-            chunkFilename: '[id].[hash:4].css',
+            chunkFilename: '[id].[hash:8].css',
         }),
 
         // 告诉 Webpack 使用了哪些动态链接库
@@ -186,10 +183,6 @@ module.exports = {
         new DllReferencePlugin({
             // 描述 polyfill 动态链接库的文件内容
             manifest: require('./dll/polyfill.manifest.json'),
-        }),
-
-        new PurifycssWebpack({
-            paths: glob.sync(path.resolve(__dirname, 'src/*.html')),
         }),
 
         new CopyWebpackPlugin([{

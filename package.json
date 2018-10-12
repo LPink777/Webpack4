@@ -37,8 +37,8 @@
         "webpack-parallel-uglify-plugin": "^1.1.0"
     },
     "scripts": {
-        "dev": "webpack-dev-server --mode=development --colors --progress",
-        "pro": "webpack --mode=production --config webpack.config.js --progress --profile",
+        "dev": "webpack-dev-server --mode=development --colors --progress --config webpack.config.dev.js",
+        "pro": "webpack --mode=production --config webpack.config.pro.js --progress --profile",
         "dll": "webpack --config webpack_dll.config.js"
     },
     "repository": {
