@@ -8,6 +8,9 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const PurifycssWebpack = require('purifycss-webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const DllReferencePlugin = require('webpack/lib/DllReferencePlugin');
+const HappyPack = require('happypack');
+const happyThreadPool = HappyPack.ThreadPool({ size: 5 });
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 
 const website = {
     publicPath: 'http://localhost:3000/'
@@ -68,24 +71,15 @@ module.exports = {
         unknownContextCritical: false,
         rules: [{
             test: /\.css$/,
-            use: [
+            loaders: [
                 MiniCssExtractPlugin.loader,
-                'css-loader',
-                'postcss-loader'
+                'happypack/loader?id=css',
             ],
             include: path.resolve(__dirname, 'src'),
         }, {
             test: /\.js$/,
+            use: ['happypack/loader?id=babel'],
             exclude: /(node_modules)/,
-            use: {
-                loader: 'babel-loader?cacheDirectory',
-                options: {
-                    presets: [
-                        'stage-3', 'es2015', 'react'
-                    ],
-                    plugins: ['transform-runtime', "transform-class-properties"]
-                }
-            }
         }, {
             test: /\.(gif|png|jpe?g|eot|woff|ttf|svg|pdf)$/,
             use: [{
@@ -103,11 +97,6 @@ module.exports = {
 
         new webpack.HotModuleReplacementPlugin(),
 
-        new MiniCssExtractPlugin({
-            filename: '[name].css',
-            chunkFilename: '[id].[hash:4].css',
-        }),
-
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: './src/index.html',
@@ -117,6 +106,76 @@ module.exports = {
                 removeAttributeQuotes: true,
                 collapseWhitespace: true,
             },
+        }),
+
+        new ParallelUglifyPlugin({
+            // 传递给 UglifyJS 的参数
+            uglifyJS: {
+                output: {
+                    // 最紧凑的输出
+                    beautify: false,
+                    // 删除所有的注释
+                    comments: false,
+                },
+                compress: {
+                    // 在UglifyJs删除没有用到的代码时不输出警告
+                    warnings: false,
+                    // 删除所有的 `console` 语句，可以兼容ie浏览器
+                    drop_console: true,
+                    // 内嵌定义了但是只用到一次的变量
+                    collapse_vars: true,
+                    // 提取出出现多次但是没有定义成变量去引用的静态值
+                    reduce_vars: true,
+                }
+            },
+        }),
+
+        new HappyPack({
+            // 用唯一的标识符 id 来代表当前的 HappyPack 是用来处理一类特定的文件
+            id: 'babel',
+            // 如何处理 .js 文件，用法和 Loader 配置中一样
+            loaders: [{
+                path: 'babel-loader',
+                query: {
+                    babelrc: true,
+                    cacheDirectory: true,
+                    presets: [
+                        'stage-3', 'es2015', 'react'
+                    ],
+                    plugins: ['transform-runtime', "transform-class-properties"]
+                },
+            }],
+            // ... 其它配置项
+            threadPool: happyThreadPool,
+            verboseWhenProfiling: true
+        }),
+
+        new HappyPack({
+            id: 'css',
+            threadPool: happyThreadPool,
+            verboseWhenProfiling: true,
+            loaders: [{
+                    loader: 'css-loader',
+                    query: {
+                        minimize: true,
+                        sourceMap: false
+                    }
+                },
+                {
+                    loader: 'postcss-loader',
+                    query: {
+                        plugins: (loader) => [
+                            require('autoprefixer')()
+                        ],
+                        sourceMap: false
+                    }
+                }
+            ]
+        }),
+
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+            chunkFilename: '[id].[hash:4].css',
         }),
 
         // 告诉 Webpack 使用了哪些动态链接库

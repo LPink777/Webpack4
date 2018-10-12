@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-
+import './ss.css';
 class A extends Component {
     render() {
         return (
-            <div>
-                xixixi
+            <div className='ss'>
+                xixixi 
             </div>
         );
     }

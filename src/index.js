@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import ReactDom from "react-dom";
 import Comp from "./component";
-import A from "./a";
+import A from "./a.js";
 import 'whatwg-fetch';
 import './index.css';
+import './ss.css';
 
 class App extends Component {
     render() {
