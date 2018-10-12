@@ -12,7 +12,8 @@ module.exports = {
 
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].[hash:4].js'
+        filename: '[name].[hash:4].js',
+        chunkFilename: '[id].[hash:8].js',
     },
 
     module: {

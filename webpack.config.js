@@ -21,7 +21,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].[hash:4].js',
-        chunkFilename: '[name].chunkhash.bundle.js',
+        chunkFilename: '[id].[hash:8].bundle.js',
     },
 
     optimization: {
@@ -104,7 +104,7 @@ module.exports = {
 
         new MiniCssExtractPlugin({
             filename: '[name].css',
-            chunkFilename: '[name].[hash:4].css',
+            chunkFilename: '[id].[hash:4].css',
         }),
 
         new HtmlWebpackPlugin({

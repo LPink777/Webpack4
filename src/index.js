@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Comp from "./component";
 import ReactDom from "react-dom";
+import Comp from "./component";
+import A from "./a";
 import './index.css';
 
 class App extends Component {
@@ -10,6 +11,7 @@ class App extends Component {
                 <p>test11</p>
                 <p>test22</p>
                 <div>123</div>
+                <A />
                 <Comp/>
             </div>
         );
