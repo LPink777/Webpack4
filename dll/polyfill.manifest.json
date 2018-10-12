@@ -1,0 +1,1 @@
+{"name":"_dll_polyfill","content":{"./node_modules/whatwg-fetch/fetch.js":{"id":53,"buildMeta":{"exportsType":"namespace","providedExports":["Headers","Request","Response","DOMException","fetch"]}}}}

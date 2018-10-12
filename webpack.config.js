@@ -7,6 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const PurifycssWebpack = require('purifycss-webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const DllReferencePlugin = require('webpack/lib/DllReferencePlugin');
 
 const website = {
     publicPath: 'http://localhost:3000/'
@@ -118,6 +119,16 @@ module.exports = {
             },
         }),
 
+        // 告诉 Webpack 使用了哪些动态链接库
+        new DllReferencePlugin({
+            // 描述 react 动态链接库的文件内容
+            manifest: require('./dll/react.manifest.json'),
+        }),
+        new DllReferencePlugin({
+            // 描述 polyfill 动态链接库的文件内容
+            manifest: require('./dll/polyfill.manifest.json'),
+        }),
+
         new PurifycssWebpack({
             paths: glob.sync(path.resolve(__dirname, 'src/*.html')),
         }),
@@ -125,6 +136,12 @@ module.exports = {
         new CopyWebpackPlugin([{
             from: __dirname + '/src/static',
             to: './static'
+        }, {
+            from: path.resolve(__dirname, 'dll/react.dll.js'),
+            to: path.resolve(__dirname, 'dist')
+        }, {
+            from: path.resolve(__dirname, 'dll/polyfill.dll.js'),
+            to: path.resolve(__dirname, 'dist')
         }]),
     ],
 
