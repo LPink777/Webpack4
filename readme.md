@@ -1,9 +1,11 @@
-### webpack4学习笔记
+### webpack4构建前端打包应用的方案
+
+使用webpack4.x来构造前端项目的打包方案，项目中使用了dllpiugin,happyPack等插件对性能进行了优化。有问题欢迎大家issue。
 
 ### 功能
 
-- babel编译
-- 图片压缩
+- babel编译,es6转es5语法
+- 图片打包压缩
 - 支持热更新
 - js、css文件自动添加版本号
 - 打包压缩文件,去除console.log,注释等多余code
@@ -81,23 +83,8 @@ npm run build （生产模式）
 
 - --json > stats.json 输出 webpack 信息 在官网http://webpack.github.io/analyse/中上传stats.json 分析数据
 
+### 补充内容
 
-### DllPlugin
+我的微信公众号: 罗曼蒂克的消亡,欢迎大家订阅,日常推送一些温暖的小故事。
 
-- 打包的时候不想每次都编译react，react-dom等这些公共得库，浪费重复的时间，可以将 react 加入到 webpack.dll.config.js 里面的 vendors 数组中，然后执行 `npm run dll`
-- 会输出 dll 文件夹，包含 Dll.js 和 manifest.json 文件，
-- manifest.json 包含 vendors 里面包的路径，编译是不会编译这些不需要编译的文件，会加快编译速度
-
-#### 开发模式
-
-- 无需 map 文件
-- 无需压缩 css,js
-- 启动多线程执行编译任务
-
-#### 生产模式
-
-- 生成 map
-- 压缩文件
-- 自动添加 hash 版本号（解决缓存问题）
-- 打包完成后输出可视化分析
-
+![二维码](https://github.com/LPink/webpack4/src/static/qrcode.jpg)
