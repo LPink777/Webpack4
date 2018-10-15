@@ -87,4 +87,4 @@ npm run build （生产模式）
 
 我的微信公众号: 罗曼蒂克的消亡,欢迎大家订阅,日常推送一些温暖的小故事。
 
-![二维码](https://github.com/LPink/webpack4/src/static/qrcode.jpg)
+![二维码](https://github.com/LPink777/Webpack4/blob/master/src/static/qrcode.jpg)
