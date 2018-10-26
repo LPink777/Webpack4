@@ -1,5 +1,7 @@
 ### webpack4构建前端打包应用的方案
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/LPink777/Webpack4.svg)](https://greenkeeper.io/)
+
 使用webpack4.x来构造前端项目的打包方案，项目中使用了dllpiugin,happyPack等插件对性能进行了优化。有问题欢迎大家issue。
 
 ### 功能
