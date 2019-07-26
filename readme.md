@@ -82,9 +82,3 @@ npm run build （生产模式）
 - --profile webpack 运行信息
 
 - --json > stats.json 输出 webpack 信息 在官网http://webpack.github.io/analyse/中上传stats.json 分析数据
-
-### 补充内容
-
-我的微信公众号: 罗曼蒂克的消亡,欢迎大家订阅,日常推送一些温暖的小故事。
-
-![二维码](https://github.com/LPink777/Webpack4/blob/master/src/static/qrcode.jpg)
